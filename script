@@ -1,0 +1,12 @@
+local eventbypass
+
+eventbypass = hookmetamethod(game, "__namecall", function(self, ...)
+    local method = getnamecallmethod()
+    local args = {...}
+
+    if not checkcaller() and self.Name == "DamageDetected" and method == "FireServer" then
+        return;
+    end
+
+    return eventbypass(self, ...)
+end)
